@@ -1,16 +1,15 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useAuthRequest } from "expo-auth-session/providers/google";
+import * as Google from "expo-auth-session/providers/google";
 
 export const Footer = () => {
-  const [request, response, prompt] = useAuthRequest({
+  const [_, __, prompt] = Google.useAuthRequest({
     androidClientId:
       "8613659292-r4m05d92u8qccgn5dphggm7621tg6hrs.apps.googleusercontent.com",
-    redirectUri:
-      "com.googleusercontent.apps.1078617999389-1q82g98j62o48v37b05v6b744g9h361:/oauth2redirect/google",
     scopes: ["profile", "email", "phone"],
   });
+
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity
@@ -20,6 +19,8 @@ export const Footer = () => {
             backgroundColor: "#db4437",
           },
         ]}
+        // redirection done not working because it dev environments
+        onPress={() => prompt()}
       >
         <Icon name="google" size={30} color="white" />
       </TouchableOpacity>

@@ -20,6 +20,7 @@ export const LoginScreen = ({ navigation }: LoginProps) => {
   const [isError, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
+  // Handle login button
   const handleLogin = async () => {
     if (mobileNumber.length < 9 || password.length < 8) {
       setError(true);
@@ -34,14 +35,22 @@ export const LoginScreen = ({ navigation }: LoginProps) => {
         },
         setLoading
       );
-      if (response?.data?.error) {
-        Alert.alert(response?.data?.error);
+      if (response.data.success) {
+        navigation.navigate("Home", {
+          user: {
+            firstName: response?.data?.data?.firstName,
+            lastName: response?.data?.data?.lastName,
+          },
+        });
+      }
+      else if (response?.data?.error) {
+        return Alert.alert(response?.data?.error);
       }
     }
   };
 
+  // For the error message
   const isValidInfo = mobileNumber.length <= 0 && password.length <= 0;
- 
 
   return (
     <View style={styles.container}>

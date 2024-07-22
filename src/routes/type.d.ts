@@ -7,5 +7,5 @@ export type RoutePath = {
 export type RootStackParamList = {
   CreateAccount: undefined;
   LoginScreen: undefined;
-  // Home: { user: { firstName: string; lastName: string } };
+  Home: { user: { firstName: string; lastName: string } };
 };

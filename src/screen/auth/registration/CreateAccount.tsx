@@ -47,10 +47,11 @@ export const CreateAccount = ({ navigation }: CreateAccountProps) => {
         setLoading
       );
 
-      if (response?.data?.error) {
+      if (response?.data?.success) {
+        navigation.reset({ index: 0, routes: [{ name: "LoginScreen" }] });
+      } else if (response?.data?.error) {
         return Alert.alert(response?.data?.error);
       }
-      navigation.reset({ index: 0, routes: [{ name: "LoginScreen" }] });
     }
   };
 
@@ -76,6 +77,7 @@ export const CreateAccount = ({ navigation }: CreateAccountProps) => {
         errorMessage="Enter your valid phone number"
         placeholder="Enter Your Phone Number"
         value={mobileNumber}
+        maxLength={10}
         onChangeText={setMobileNumber}
         keyboardType="phone-pad"
         isError={isError && mobileNumber.length < 10}

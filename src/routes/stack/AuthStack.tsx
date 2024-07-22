@@ -6,6 +6,7 @@ import { RootStackParamList } from "../type";
 import { routePath } from "../path/RoutesPath";
 import { LoginScreen } from "../../screen/auth/login/Login";
 import { CreateAccount } from "../../screen/auth/registration/CreateAccount";
+import LandingHome from "../../screen/dashbord/LandingHome";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -21,7 +22,7 @@ export const RootNavigation = () => {
           name={routePath.CreateAccount}
           component={CreateAccount}
         />
-        {/* <Stack.Screen name="Home" component={<></>} /> */}
+        <Stack.Screen name={routePath.Home} component={LandingHome} />
       </Stack.Navigator>
     </NavigationContainer>
   );
